@@ -1,6 +1,7 @@
 import React from 'react'
 import { Navigate, useLocation, Outlet } from "react-router-dom";
 import Navbar from '../../navbar/Navbar';
+import Sidebar from '../../sidebar/Sidebar';
 const UserLayout = () => {
    
     let location = useLocation();
@@ -9,7 +10,8 @@ const UserLayout = () => {
     if (token) {
         return (
           <>
-            <Navbar />
+            {/* <Navbar /> */}
+            <Sidebar/>
             <Outlet />
           </>
         );
