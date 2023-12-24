@@ -3,7 +3,7 @@ import React from 'react'
 const Login = () => {
   return (
     <div className='max-w-sm mx-auto'>
-    <h1 className='text-center mt-2  mb-3 text-4xl'>Register Form</h1>
+    <h1 className='text-center mt-2  mb-3 text-4xl'>Login Form</h1>
 
 
 
