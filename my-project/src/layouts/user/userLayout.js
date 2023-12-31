@@ -10,9 +10,11 @@ const UserLayout = () => {
     if (token) {
         return (
           <>
-            {/* <Navbar /> */}
+           <div className='flex'>
+
             <Sidebar/>
             <Outlet />
+           </div>
           </>
         );
       }
