@@ -15,21 +15,21 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(useragent.express());
 
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'https://hasan-imzi.tech, https://devtestbd.tech');
-  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+// app.use((req, res, next) => {
+//   res.header('Access-Control-Allow-Origin', 'https://hasan-imzi.tech, https://devtestbd.tech');
+//   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+//   res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
 
-  // Handle preflight requests
-  if (req.method === 'OPTIONS') {
-    return res.sendStatus(200);
-  }
+//   // Handle preflight requests
+//   if (req.method === 'OPTIONS') {
+//     return res.sendStatus(200);
+//   }
 
-  next();
-});
+//   next();
+// });
 
 
-// app.use(cors());
+app.use(cors());
 
 
 

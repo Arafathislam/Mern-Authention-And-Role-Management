@@ -17,7 +17,7 @@ async function create(data) {
   try {
     // console.log("d",data);
 
-    const { username, password, password_confirmation, roles } = data;
+    const { username, password, confirmPassword, roles,email } = data;
 
     const isExitsUser = await UserModel.findOne({ username: username });
 
@@ -33,15 +33,17 @@ async function create(data) {
 
     } else {
 
-      if (username && password && password_confirmation && roles) {
+      if (username && password && confirmPassword && email) {
         let salt = await bcrypt.genSalt(10);
+        let role='user'
         let hashPassword = await bcrypt.hash(password, salt);
 
-        if (password === password_confirmation) {
+        if (password === confirmPassword) {
           let doc = new UserModel({
             username: username,
             password: hashPassword,
-            roles: roles
+            roles: role,
+            email:email
           });
 
           let result = await doc.save();
@@ -175,10 +177,10 @@ async function login(data, req, res) {
 async function changePass(data, user) {
   try {
     // console.log(data,"d");
-    const { password, password_confirmation } = data;
+    const { password, confirmPassword } = data;
 
-    if (password && password_confirmation) {
-      if (password === password_confirmation) {
+    if (password && confirmPassword) {
+      if (password === confirmPassword) {
         let salt = await bcrypt.genSalt(10);
         let newHashPassword = await bcrypt.hash(password, salt);
         // console.log("u",data.user);
@@ -328,16 +330,16 @@ async function resetEmail(data) {
 async function resetPassword(data, params) {
 
   try {
-    const { password, password_confirmation } = data
+    const { password, confirmPassword } = data
     const { id, token } = params
     let user = await UserModel.findById(id)
     let new_secret = user._id + process.env.JWT_SECRET_KEY
 
     jwt.verify(token, new_secret)
 
-    if (password && password_confirmation) {
+    if (password && confirmPassword) {
 
-      if (password === password_confirmation) {
+      if (password === confirmPassword) {
         let salt = await bcrypt.genSalt(10);
         let newHashPassword = await bcrypt.hash(password, salt);
         // console.log("u",req.user);
