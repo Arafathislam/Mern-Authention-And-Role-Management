@@ -27,25 +27,26 @@ const Login = () => {
 
 
     const handleSubmit = async (e) => {
-        e.preventDefault()
+        e.preventDefault();
         try {
-            const { accessToken } = await login({ username, password }).unwrap()
-            dispatch(setCredentials({ accessToken }))
-            setUsername('')
-            setPassword('')
-            navigate('/user/dashboard')
+            const response = await login({ username, password }).unwrap();
+            const { accessToken } = response.data;
+            // console.log("accesstoken", accessToken);
+            dispatch(setCredentials({ accessToken }));
+            setUsername('');
+            setPassword('');
+            navigate('/user/dashboard');
         } catch (err) {
             if (!err.status) {
-            
                 setErrMsg(err.data?.message);
             }
-
-            
+    
             if (errRef.current) {
                 errRef.current.focus();
             }
         }
-    }
+    };
+    
 
     const handleUserInput = (e) => setUsername(e.target.value)
     const handlePwdInput = (e) => setPassword(e.target.value)
